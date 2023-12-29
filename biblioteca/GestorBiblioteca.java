@@ -22,6 +22,9 @@ public class GestorBiblioteca {
 
         System.out.println("\nContenido de la lista después de la conversión:");
         nuevaListaLibros.mostrarContenido();
+        
+        Usuario gabriel = new Usuario();
+        System.out.println(gabriel);
     }
 }
         
