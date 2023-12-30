@@ -1,16 +1,21 @@
 package biblioteca.Model;
 
+import com.google.gson.Gson;
+
+import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public abstract class User {
+public class User {
 
-    protected String id;
-    protected String nombre;
-    protected String direccion;
-    protected String telf;
-    protected String email;
-    protected String password;
+    private String id;
+    private String nombre;
+    private String direccion;
+    private String telf;
+    private String email;
+    private String password;
     private String creado;
 
     public User() {
@@ -19,7 +24,6 @@ public abstract class User {
     }
 
     public User(String nombre, String direccion, String telf, String email, String password) {
-
         this.id = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.direccion = direccion;
@@ -28,7 +32,7 @@ public abstract class User {
         this.password = password;
         this.creado = LocalDateTime.now().toString();
     }
-    
+
     public String getId() {
         return id;
     }
@@ -52,11 +56,15 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
-    
+
     public String fechaCreacion() {
         return creado;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -76,7 +84,69 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public boolean iniciarSesion(String correo, String pass) {
+        return autenticar(correo, pass);
+    }
+
+    protected boolean autenticar(String correo, String pass) {
+        return this.email.equals(correo) && this.password.equals(pass);
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static User fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, User.class);
+    }
+
+    private void saveToFile() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("user_data.csv", true))) {
+            String csvData = this.toCsv();
+            writer.println(csvData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<User> loadFromCsv() {
+        List<User> users = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("user_data.csv"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                User user = User.fromCsv(line);
+                users.add(user);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public static User fromCsv(String csvLine) {
+        String[] data = csvLine.split(",");
+        User user = new User();
+        user.setId(data[0]);
+        user.setNombre(data[1]);
+        user.setDireccion(data[2]);
+        user.setTelf(data[3]);
+        user.setEmail(data[4]);
+        user.setPassword(data[5]);
+        user.setCreado(data[6]);
+        return user;
+    }
+
+    private String toCsv() {
+        return String.join(",", this.id, this.nombre, this.direccion, this.telf, this.email, this.password, this.creado);
+    }
+
+    public void setCreado(String creado) {
+        this.creado = creado;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -86,6 +156,7 @@ public abstract class User {
                 ", telf='" + telf + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", creado='" + creado + '\'' +
                 '}';
     }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Admin extends User {
 
-    private static Admin instance; //Instancia única
+    private static Admin instance; 
 
     private Admin() {
         super("Default Admin", "Default Address", "Default Phone", "admin@example.com", "adminPassword");

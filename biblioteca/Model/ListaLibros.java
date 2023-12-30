@@ -35,7 +35,7 @@ public class ListaLibros {
                 return;
             }
         }
-        System.out.println("El libro no se encontró en la lista.");
+        System.out.println("El libro no se encontro en la lista.");
     }
 
     public Libro buscarPorTitulo(String titulo) {

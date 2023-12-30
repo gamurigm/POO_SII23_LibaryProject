@@ -5,7 +5,8 @@ public class GestorBiblioteca {
     public static void main(String[] args) {
         
         ListaLibros listaLibros = inicializarListaLibros();
-        MenuLogin.showMainMenu(listaLibros);
+        MenuLogin.mainMenu(listaLibros);
+        
     }
     
     

@@ -29,7 +29,7 @@ public class AdminMenu {
                 case 1 -> agregarLibro();
                 case 2 -> eliminarLibro();
                 case 3 -> consultarBiblioteca();
-                case 4 -> System.out.println("Saliendo del Menú de Administrador.");
+                case 4 -> System.out.println("Saliendo del Menu de Administrador.");
                 default -> System.out.println("Opcion no valida. Intente de nuevo.");
             }
 
@@ -59,7 +59,7 @@ public class AdminMenu {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("\n--- Eliminar Libro ---");
-    System.out.print("Ingrese el título del libro que desea eliminar: ");
+    System.out.print("Ingrese el titulo del libro que desea eliminar: ");
     String titulo = scanner.nextLine();
 
     Libro libroEliminar = listaLibros.buscarPorTitulo(titulo);
@@ -68,7 +68,7 @@ public class AdminMenu {
         listaLibros.eliminarLibro(libroEliminar);
         System.out.println("Libro eliminado exitosamente.");
     } else {
-        System.out.println("El libro no se encontró en la lista.");
+        System.out.println("El libro no se encontro en la lista.");
     }
 }
 

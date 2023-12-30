@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MenuLogin {
     
-    public static void showMainMenu(ListaLibros listaLibros) {
+    public static void mainMenu(ListaLibros listaLibros) {
         
         Scanner scanner = new Scanner(System.in);
        
@@ -29,15 +29,14 @@ public class MenuLogin {
             }
 
             case 2 -> {
-                Usuario user = Login.iniciarSesionUsuario();
-                if (user!= null) {
+               
                     UserMenu userMenu = new UserMenu(listaLibros);
                     
-                    userMenu.mostrarMenu(); 
-                }
+                    userMenu.menuPrincipal(); 
+                
             }
 
-            default -> System.out.println("No Valido!");
+            default -> System.out.println("NO Valido!");
         }
     }   
 }
