@@ -6,4 +6,6 @@ Ralizar:
 2. Historial, Usuario + prestamo (2 libros max)
 3. Prestamo debe ser de maximo 2 libros y maximo 30 dias desde la fecha del mismo, por lo que se debe hace una agragacion
 entre usuario y prestamo.
+4. Implementar las busquedas por el Usuario.
+5. Implemnetar base de datos MongoDB.
 
